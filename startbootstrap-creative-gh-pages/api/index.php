@@ -156,7 +156,7 @@ function updateUsuario($id_persona) {
 		$stmt->bindParam("foto", $vino->foto);
 		$stmt->bindParam("email", $vino->email);
 		$stmt->bindParam("password", $vino->password);
-		$stmt->bindParam("id_platillo", $id_platillo);
+		$stmt->bindParam("id_persona", $id_persona);
 		$stmt->execute();
 		$db = null;
 		echo json_encode($vino);
