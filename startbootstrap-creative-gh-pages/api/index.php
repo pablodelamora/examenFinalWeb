@@ -59,7 +59,7 @@ function addPlatillo() {
 		$stmt->execute();
 		$platillo->id = $db->lastInsertId();
 		$db = null;
-		echo json_encode($vino);
+		echo json_encode($platillo);
 	} catch(PDOException $e) {
 		error_log($e->getMessage(), 3, '/var/tmp/php.log');
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
