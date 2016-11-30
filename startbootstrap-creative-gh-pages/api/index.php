@@ -173,7 +173,7 @@ function deleteUsuario($id_persona) {
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
-		$stmt->bindParam("id", $id);
+		$stmt->bindParam("id", $id_persona);
 		$stmt->execute();
 		$db = null;
 	} catch(PDOException $e) {
