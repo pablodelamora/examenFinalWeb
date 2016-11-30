@@ -1,4 +1,4 @@
-var rootURL = "http://ubiquitous.csf.itesm.mx/~daw-1015019/content/ExamenWeb/api/index.php/login";
+var rootURL = "http://ubiquitous.csf.itesm.mx/~daw-1020365/content/entregaFinal/examenFinalWeb/startbootstrap-creative-gh-pages/api/index.php/login";
 
 function formToJSON() {
 	return JSON.stringify({
