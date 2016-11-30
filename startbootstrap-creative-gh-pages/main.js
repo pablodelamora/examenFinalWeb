@@ -9,3 +9,16 @@ if(localStorage.getItem("session") != ''){
 function logout(){
     localStorage.setItem("session", '');
 }
+
+
+function obtenerDatosCliente() {
+	return JSON.stringify({
+            "nombre": $('#nombreCliente').val(),
+            "apPaterno": $('#apPaternoCliente').val(),
+            "apMaterno": $('#apMaternoCliente').val(),
+            "foto": $('#fotoCliente').val(),
+            "telefono": $('#telefonoCliente').val(),
+            "membresia": $('#membresiaCliente').val(),
+            "user": $('#userCliente').val(),
+            "password": $('#passwordCliente').val(),
+		});
