@@ -7,9 +7,14 @@ $app = new Slim();
 $app->get('/platillos', 'getPlatillos');
 $app->get('/platillos/:id',	'getPlatillo');
 $app->post('/platillos', 'addPlatillo');
-//$app->get('/vinos/search/:query', 'findByName');
 $app->put('/platillos/:id', 'updatePlatillo');
-$app->delete('/platillo/:id',	'deletePlatillo');
+//$app->get('/vinos/search/:query', 'findByName');
+////////////////////////////////////////////
+//$app->delete('/platillo/:id',	'deletePlatillo');
+
+//////////////////////////////////////////////////
+$app->post('/usuario', 'addUsuario');
+$app->put('/usuario/:id', 'updateUsuario');
 
 $app->run();
 
@@ -65,6 +70,36 @@ function addPlatillo() {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
+/////////////////////////////////////////////////////////////////
+//Add usuario
+function addUsuario() {
+	error_log('addUsuario\n', 3, '/var/tmp/php.log');
+        // El objeto request facilita el acceso a los datos de la peticion
+        // En este caso la representacion JSON de un objeto Vino.
+	$request = Slim::getInstance()->request();
+	$platillo = json_decode($request->getBody());
+	$sql = "INSERT INTO exf_Persona (nombre, apellidoP, apellidoM, foto, email, password) VALUES (:nombre, :apellidoP, :apellidoM, :foto , :email, :password)";
+	try {
+		$db = getConnection();
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam("nombre", $platillo->nombre);
+		$stmt->bindParam("apellidoP", $platillo->apellidoP);
+		$stmt->bindParam("apellidoM", $platillo->apellidoM);
+		$stmt->bindParam("foto", $platillo->foto);
+		$stmt->bindParam("email", $platillo->email);
+		$stmt->bindParam("password", $platillo->password);
+		$stmt->execute();
+		$platillo->id = $db->lastInsertId();
+		$db = null;
+		echo json_encode($platillo);
+	} catch(PDOException $e) {
+		error_log($e->getMessage(), 3, '/var/tmp/php.log');
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
+}
+/////////////////////////////////////////////////////////////////
+
+
 
 function updatePlatillo($id_platillo) {
 	$request = Slim::getInstance()->request();
@@ -87,6 +122,34 @@ function updatePlatillo($id_platillo) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
+
+
+/////////////////////////////////////////////////////////////////////////
+//update persona
+function updatePersona($id_persona) {
+	$request = Slim::getInstance()->request();
+	$body = $request->getBody();
+	$vino = json_decode($body);
+	$sql = "UPDATE exf_Persona SET nombre=:nombre, apellidoP=:apellidoP, apellidoM=:apellidoM, foto=:foto, email=:email, password=:password WHERE id_persona=:id_persona";
+	try {
+		$db = getConnection();
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam("nombre", $vino->nombre);
+		$stmt->bindParam("apellidoP", $vino->apellidoP);
+		$stmt->bindParam("apellidoM", $vino->apellidoM);
+		$stmt->bindParam("foto", $vino->foto);
+		$stmt->bindParam("email", $vino->email);
+		$stmt->bindParam("password", $vino->password);
+		$stmt->bindParam("id_platillo", $id_platillo);
+		$stmt->execute();
+		$db = null;
+		echo json_encode($vino);
+	} catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
+}
+/////////////////////////////////////////////////////////////////////////
+
 
 function deleteVino($id) {
 	$sql = "DELETE FROM Vino WHERE id=:id";
