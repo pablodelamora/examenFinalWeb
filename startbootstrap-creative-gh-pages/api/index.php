@@ -168,8 +168,8 @@ function updateUsuario($id_persona) {
 /////////////////////////////////////////////////////////////////////////
 
 
-function deleteUsuario($id_usuario) {
-	$sql = "DELETE FROM exf_Persona WHERE id_usuario=:id_usuario";
+function deleteUsuario($id_persona) {
+	$sql = "DELETE FROM exf_Persona WHERE id_persona=:id_persona";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
