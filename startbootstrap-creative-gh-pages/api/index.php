@@ -70,7 +70,7 @@ function updatePlatillo($id) {
 	$request = Slim::getInstance()->request();
 	$body = $request->getBody();
 	$vino = json_decode($body);
-	$sql = "UPDATE Platillo SET nombre=:nombre, descripcion=:descripcion, calorias=:calorias, foto=:foto, precio=:precio, descripcion=:descripcion WHERE id=:id";
+	$sql = "UPDATE exf_Platillo SET nombre=:nombre, descripcion=:descripcion, calorias=:calorias, foto=:foto, precio=:precio, descripcion=:descripcion WHERE id=:id";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
