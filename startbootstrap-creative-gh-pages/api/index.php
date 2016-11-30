@@ -6,8 +6,8 @@ $app = new Slim();
 // Definicion de end points y funciones callback
 $app->get('/platillos', 'getPlatillos');
 $app->get('/platillos/:id',	'getPlatillo');
-//$app->get('/vinos/search/:query', 'findByName');
 $app->post('/platillos', 'addPlatillo');
+//$app->get('/vinos/search/:query', 'findByName');
 $app->put('/platillos/:id', 'updatePlatillo');
 $app->delete('/platillo/:id',	'deletePlatillo');
 
@@ -66,20 +66,19 @@ function addPlatillo() {
 	}
 }
 
-function updateVino($id) {
+function updatePlatillo($id) {
 	$request = Slim::getInstance()->request();
 	$body = $request->getBody();
 	$vino = json_decode($body);
-	$sql = "UPDATE Vino SET nombre=:nombre, uvas=:uvas, pais=:pais, region=:region, anio=:anio, descripcion=:descripcion WHERE id=:id";
+	$sql = "UPDATE Platillo SET nombre=:nombre, descripcion=:descripcion, calorias=:calorias, foto=:foto, precio=:precio, descripcion=:descripcion WHERE id=:id";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
 		$stmt->bindParam("nombre", $vino->nombre);
-		$stmt->bindParam("uvas", $vino->uvas);
-		$stmt->bindParam("pais", $vino->pais);
-		$stmt->bindParam("region", $vino->region);
-		$stmt->bindParam("anio", $vino->anio);
 		$stmt->bindParam("descripcion", $vino->descripcion);
+		$stmt->bindParam("calorias", $vino->calorias);
+		$stmt->bindParam("foto", $vino->foto);
+		$stmt->bindParam("precio", $vino->precio);
 		$stmt->bindParam("id", $id);
 		$stmt->execute();
 		$db = null;
