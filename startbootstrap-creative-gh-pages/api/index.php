@@ -27,11 +27,11 @@ function getPlatillos() {
 }
 
 function getPlatillo($id) {
-	$sql = "SELECT * FROM exf_Platillo WHERE id=:id";
+	$sql = "SELECT * FROM exf_Platillo WHERE id_platillo=:id_platillo";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
-		$stmt->bindParam("id", $id);
+		$stmt->bindParam("id_platillo", $id_platillo);
 		$stmt->execute();
 		$vino = $stmt->fetchObject();
 		$db = null;
