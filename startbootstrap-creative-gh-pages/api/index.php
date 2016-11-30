@@ -142,7 +142,7 @@ function updatePlatillo($id_platillo) {
 
 /////////////////////////////////////////////////////////////////////////
 //update persona
-function updatePersona($id_persona) {
+function updateUsuario($id_persona) {
 	$request = Slim::getInstance()->request();
 	$body = $request->getBody();
 	$vino = json_decode($body);
