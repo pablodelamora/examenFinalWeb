@@ -8,6 +8,7 @@ $app->get('/platillos', 'getPlatillos');
 $app->get('/platillos/:id',	'getPlatillo');
 $app->post('/platillos', 'addPlatillo');
 $app->put('/platillos/:id', 'updatePlatillo');
+$app->post('/login', 'getLogIn');
 //$app->get('/vinos/search/:query', 'findByName');
 ////////////////////////////////////////////
 //$app->delete('/platillo/:id',	'deletePlatillo');
@@ -207,6 +208,25 @@ function getConnection() {
 	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	return $dbh;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+function getLogIn() {
+	$request = Slim::getInstance()->request();
+	$cliente = json_decode($request->getBody());
+	$sql = "select * FROM exf_Persona WHERE email = :email AND password = :password";
+	try {
+		$db = getConnection();
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam("email", $cliente->user);
+		$stmt->bindParam("password", $cliente->password);
+		$stmt->execute();
+		$c = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$db = null;
+		echo '{"vino": ' . json_encode($c) . '}';
+	} catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
 }
 
 ?>
