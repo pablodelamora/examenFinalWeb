@@ -8,6 +8,7 @@ function formToJSON() {
 }
 
 function login() {
+  console.log(formToJSON())
 	$.ajax({
 		type: 'POST',
 		contentType: 'application/json',
