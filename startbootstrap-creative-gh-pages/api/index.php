@@ -16,6 +16,7 @@ $app->put('/platillos/:id', 'updatePlatillo');
 $app->get('/usuario', 'getUsuarios');
 $app->post('/usuario', 'addUsuario');
 $app->put('/usuario/:id', 'updateUsuario');
+$app->delete('/usuario/:id',	'deleteUsuario');
 
 $app->run();
 
@@ -167,8 +168,8 @@ function updateUsuario($id_persona) {
 /////////////////////////////////////////////////////////////////////////
 
 
-function deleteVino($id) {
-	$sql = "DELETE FROM Vino WHERE id=:id";
+function deleteUsuario($id_usuario) {
+	$sql = "DELETE FROM exf_Persona WHERE id_usuario=:id_usuario";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
@@ -179,6 +180,8 @@ function deleteVino($id) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////
 
 function findByName($query) {
 	$sql = "SELECT * FROM Vino WHERE UPPER(nombre) LIKE :query ORDER BY nombre";
