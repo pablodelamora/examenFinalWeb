@@ -13,6 +13,7 @@ $app->put('/platillos/:id', 'updatePlatillo');
 //$app->delete('/platillo/:id',	'deletePlatillo');
 
 //////////////////////////////////////////////////
+$app->get('/usuario', 'getUsuarios');
 $app->post('/usuario', 'addUsuario');
 $app->put('/usuario/:id', 'updateUsuario');
 
@@ -45,6 +46,21 @@ function getPlatillo($id_platillo) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
+
+////////////////////////////////////////////////////////////////
+function getUsuarios() {
+	$sql = "SELECT * FROM exf_Persona ORDER BY nombre";
+	try {
+		$db = getConnection();
+		$stmt = $db->query($sql);
+		$platillos = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$db = null;
+		echo '{"personas": ' . json_encode($platillos) . '}';
+	} catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
+}
+////////////////////////////////////////////////////////////////
 
 function addPlatillo() {
 	error_log('addPlatillo\n', 3, '/var/tmp/php.log');
