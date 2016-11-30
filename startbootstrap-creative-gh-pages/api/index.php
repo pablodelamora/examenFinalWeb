@@ -26,7 +26,7 @@ function getPlatillos() {
 	}
 }
 
-function getPlatillo($id) {
+function getPlatillo($id_platillo) {
 	$sql = "SELECT * FROM exf_Platillo WHERE id_platillo=:id_platillo";
 	try {
 		$db = getConnection();
