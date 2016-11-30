@@ -19,6 +19,14 @@ $app->post('/usuario', 'addUsuario');
 $app->put('/usuario/:id', 'updateUsuario');
 $app->delete('/usuario/:id',	'deleteUsuario');
 
+///////////////////////////////////////////////////////
+//restaurante
+///////////////////////////////////////////////////////
+$app->get('/restaurante', 'getRestaurante');
+$app->post('/restaurante', 'addRestaurante');
+$app->put('/usuario/:id', 'updateRestaurante');
+$app->delete('/usuario/:id',	'deleteRestaurante');
+
 $app->run();
 
 function getPlatillos() {
@@ -228,5 +236,49 @@ function getLogIn() {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
+
+
+
+function getRestaurante() {
+	$sql = "SELECT * FROM exf_Restaurante ORDER BY nombre";
+	try {
+		$db = getConnection();
+		$stmt = $db->query($sql);
+		$platillos = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$db = null;
+		echo '{"restaurante": ' . json_encode($platillos) . '}';
+	} catch(PDOException $e) {
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
+}
+
+
+
+
+function addRestaurante() {
+	error_log('addRestaurante\n', 3, '/var/tmp/php.log');
+        // El objeto request facilita el acceso a los datos de la peticion
+        // En este caso la representacion JSON de un objeto Vino.
+	$request = Slim::getInstance()->request();
+	$platillo = json_decode($request->getBody());
+	$sql = "INSERT INTO exf_Restaurante (nombre, direccion, foto, telefono) VALUES (:nombre, :direccion, :foto, :telefono)";
+	try {
+		$db = getConnection();
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam("nombre", $platillo->nombre);
+		$stmt->bindParam("direccion", $platillo->direccion);
+		$stmt->bindParam("foto", $platillo->foto);
+		$stmt->bindParam("telefono", $platillo->telefono);
+		$stmt->execute();
+		$platillo->id = $db->lastInsertId();
+		$db = null;
+		echo json_encode($platillo);
+	} catch(PDOException $e) {
+		error_log($e->getMessage(), 3, '/var/tmp/php.log');
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
+}
+
+
 
 ?>
