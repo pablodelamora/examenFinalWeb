@@ -18,9 +18,9 @@ function getPlatillos() {
 	try {
 		$db = getConnection();
 		$stmt = $db->query($sql);
-		$vinos = $stmt->fetchAll(PDO::FETCH_OBJ);
+		$platillos = $stmt->fetchAll(PDO::FETCH_OBJ);
 		$db = null;
-		echo '{"platillos": ' . json_encode($vinos) . '}';
+		echo '{"platillos": ' . json_encode($platillos) . '}';
 	} catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
@@ -62,7 +62,7 @@ function addPlatillo() {
 		echo json_encode($vino);
 	} catch(PDOException $e) {
 		error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		echo '{"error":{"text":'. $e->getMessage() .'}}'; 
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
 
@@ -122,7 +122,7 @@ function getConnection() {
 	$dbhost="localhost";
 	$dbuser="1020365_user";
 	$dbpass="1020365";
-	$dbname="JSON";
+	$dbname="daw_1020365";
 	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	return $dbh;
