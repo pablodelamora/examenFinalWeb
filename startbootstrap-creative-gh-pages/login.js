@@ -2,7 +2,7 @@ var rootURL = "http://ubiquitous.csf.itesm.mx/~daw-1020365/content/entregaFinal/
 
 function formToJSON() {
 	return JSON.stringify({
-		"user": $('#user').val(),
+		"email": $('#email').val(),
 		"password": $('#password').val()
 		});
 }
