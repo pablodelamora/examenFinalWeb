@@ -15,6 +15,7 @@ function login() {
 		dataType: "json",
 		data: formToJSON(),
 		success: function(data, textStatus, jqXHR){
+            console.log(rootURL,data)
             if(data.vino.length > 0){
                 localStorage.setItem("session", data.vino[0].id_cliente);
                 //alert(localStorage.getItem("session"));
