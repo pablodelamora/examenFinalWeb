@@ -218,7 +218,7 @@ function getLogIn() {
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
-		$stmt->bindParam("email", $cliente->user);
+		$stmt->bindParam("email", $cliente->email);
 		$stmt->bindParam("password", $cliente->password);
 		$stmt->execute();
 		$c = $stmt->fetchAll(PDO::FETCH_OBJ);
