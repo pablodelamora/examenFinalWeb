@@ -1,11 +1,13 @@
 if(localStorage.getItem("session") != ''){
-    console.log("Hola");
     $('#loginBtn').hide();
     $('#logoutBtn').show();
 }else{
     $('#loginBtn').show();
     $('#logoutBtn').hide();
 }
+
+
+buscaCliente();
 
 function logout(){
     localStorage.setItem("session", '');
