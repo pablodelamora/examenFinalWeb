@@ -23,4 +23,4 @@ function obtenerDatosCliente() {
             "membresia": $('#membresiaCliente').val(),
             "user": $('#userCliente').val(),
             "password": $('#passwordCliente').val(),
-		});
+		})};
