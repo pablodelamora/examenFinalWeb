@@ -1,4 +1,5 @@
 if(localStorage.getItem("session") != ''){
+    console.log("Hola");
     $('#loginBtn').hide();
     $('#logoutBtn').show();
 }else{
