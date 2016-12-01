@@ -21,7 +21,9 @@ function buscaCliente(){
     		type: 'GET',
     		url: url,
     		dataType: "json",
+        console.log("1")
     		success: function(data, textStatus, jqXHR){
+                console.log("2")
                 var cliente = data;
                 if(cliente){
                   $('#nombre').val(cliente.nombre);
