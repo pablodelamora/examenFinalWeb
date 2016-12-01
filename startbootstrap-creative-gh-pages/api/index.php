@@ -282,7 +282,7 @@ function addRestaurante() {
 
 
 function getUsuario($id_persona) {
-	$sql = "SELECT * FROM exf_cliente WHERE id_persona=:id_persona";
+	$sql = "SELECT * FROM exf_Persona WHERE id_persona=:id_persona";
 	try {
 		$db = getConnection();
 		$stmt = $db->prepare($sql);
