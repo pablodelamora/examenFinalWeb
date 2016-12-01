@@ -16,12 +16,11 @@ function logout(){
 function buscaCliente(){
     if(localStorage.getItem("session") != ''){
         var url = "http://ubiquitous.csf.itesm.mx/~daw-1020365/content/entregaFinal/examenFinalWeb/startbootstrap-creative-gh-pages/api/index.php/usuario/" + localStorage.getItem("session");
-
+        console.log("1")
         $.ajax({
     		type: 'GET',
     		url: url,
     		dataType: "json",
-        console.log("1")
     		success: function(data, textStatus, jqXHR){
                 console.log("2")
                 var cliente = data;
