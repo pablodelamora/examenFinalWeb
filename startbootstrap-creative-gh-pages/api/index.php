@@ -18,14 +18,15 @@ $app->get('/usuario', 'getUsuarios');
 $app->post('/usuario', 'addUsuario');
 $app->put('/usuario/:id', 'updateUsuario');
 $app->delete('/usuario/:id',	'deleteUsuario');
+$app->get('/usuario/:id', 'getUsuario');
 
 ///////////////////////////////////////////////////////
 //restaurante
 ///////////////////////////////////////////////////////
 $app->get('/restaurante', 'getRestaurante');
 $app->post('/restaurante', 'addRestaurante');
-$app->put('/usuario/:id', 'updateRestaurante');
-$app->delete('/usuario/:id',	'deleteRestaurante');
+$app->put('/restaurante/:id', 'updateRestaurante');
+$app->delete('/restaurante/:id',	'deleteRestaurante');
 
 $app->run();
 
@@ -275,6 +276,22 @@ function addRestaurante() {
 		echo json_encode($platillo);
 	} catch(PDOException $e) {
 		error_log($e->getMessage(), 3, '/var/tmp/php.log');
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
+}
+
+
+function getUsuario($id_persona) {
+	$sql = "SELECT * FROM exf_cliente WHERE id_persona=:id_persona";
+	try {
+		$db = getConnection();
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam("id_persona", $id_persona);
+		$stmt->execute();
+		$cliente = $stmt->fetchObject();
+		$db = null;
+		echo json_encode($cliente);
+	} catch(PDOException $e) {
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
