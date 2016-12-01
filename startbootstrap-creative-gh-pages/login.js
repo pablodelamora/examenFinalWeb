@@ -19,7 +19,7 @@ function login() {
             console.log(rootURL,data)
             if(data.vino.length > 0){
                 localStorage.setItem("session", data.vino[0].id_persona);
-                //alert(localStorage.getItem("session"));
+                alert(localStorage.getItem("session"));
                 window.location = "index.html";
             }else{
                 alert("Usuario y/o contraseña incorrectos");
