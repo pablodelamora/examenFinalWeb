@@ -11,6 +11,7 @@ function logout(){
 }
 
 
+
 function obtenerDatosCliente() {
 	return JSON.stringify({
             "nombre": $('#nombreCliente').val(),
