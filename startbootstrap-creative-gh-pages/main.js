@@ -31,6 +31,8 @@ function buscaCliente(){
                 	$('#apellidoP').val(cliente.apellidoP);
                 	$('#apellidoM').val(cliente.apellidoM);
                 	$('#foto').val(cliente.foto);
+                  $('#email').val(cliente.email);
+                  $('#password').val(cliente.password);
 
                 }else{
                     alert("Usuario y/o contraseña incorrectos");
@@ -44,14 +46,32 @@ function buscaCliente(){
 }
 
 
+
+
+function  actualizarCliente(){
+    var url = "http://ubiquitous.csf.itesm.mx/~daw-1020365/content/entregaFinal/examenFinalWeb/startbootstrap-creative-gh-pages/api/index.php/usuario/" + localStorage.getItem("session");
+	$.ajax({
+		type: 'PUT',
+		contentType: 'application/json',
+		url: url,
+		dataType: "json",
+		data: obtenerDatosCliente(),
+		success: function(data, textStatus, jqXHR){
+			console.log('Cliente actualizado exitosamente');
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			alert('Error en la funcion actualizaVino: ' + textStatus);
+		}
+	});
+}
+
+
 function obtenerDatosCliente() {
 	return JSON.stringify({
             "nombre": $('#nombreCliente').val(),
-            "apPaterno": $('#apPaternoCliente').val(),
-            "apMaterno": $('#apMaternoCliente').val(),
-            "foto": $('#fotoCliente').val(),
-            "telefono": $('#telefonoCliente').val(),
-            "membresia": $('#membresiaCliente').val(),
-            "user": $('#userCliente').val(),
-            "password": $('#passwordCliente').val(),
+            "apellidoP": $('#apellidoP').val(),
+            "apellidoM": $('#apellidoM').val(),
+            "foto": $('#foto').val(),
+            "email": $('#email').val(),
+            "password": $('#password').val(),
 		})};
