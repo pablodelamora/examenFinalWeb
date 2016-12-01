@@ -57,7 +57,7 @@ function  actualizarCliente(){
 		dataType: "json",
 		data: obtenerDatosCliente(),
 		success: function(data, textStatus, jqXHR){
-			console.log('Cliente actualizado exitosamente');
+			alert('Cliente actualizado exitosamente');
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			alert('Error en la funcion actualizaVino: ' + textStatus);
@@ -67,7 +67,6 @@ function  actualizarCliente(){
 
 
 function obtenerDatosCliente() {
-  console.log("Holiiiii");
 	return JSON.stringify({
             "nombre": $('#nombreCliente').val(),
             "apellidoP": $('#apellidoP').val(),
