@@ -67,11 +67,12 @@ function  actualizarCliente(){
 
 
 function obtenerDatosCliente() {
+  console.log("Holiiiii");
 	return JSON.stringify({
             "nombre": $('#nombreCliente').val(),
             "apellidoP": $('#apellidoP').val(),
             "apellidoM": $('#apellidoM').val(),
             "foto": $('#foto').val(),
             "email": $('#email').val(),
-            "password": $('#password').val(),
+            "password": $('#password').val()
 		})};
