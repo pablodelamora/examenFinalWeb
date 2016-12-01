@@ -13,6 +13,34 @@ function logout(){
 
 
 
+function buscaCliente(){
+    if(localStorage.getItem("session") != ''){
+        var url = "http://ubiquitous.csf.itesm.mx/~daw-1020365/content/entregaFinal/examenFinalWeb/startbootstrap-creative-gh-pages/api/index.php/usuario/" + localStorage.getItem("session");
+
+        $.ajax({
+    		type: 'GET',
+    		url: url,
+    		dataType: "json",
+    		success: function(data, textStatus, jqXHR){
+                var cliente = data;
+                if(cliente){
+                  $('#nombre').val(cliente.nombre);
+                	$('#apellidoP').val(cliente.apellidoP);
+                	$('#apellidoM').val(cliente.apellidoM);
+                	$('#foto').val(cliente.foto);
+
+                }else{
+                    alert("Usuario y/o contraseña incorrectos");
+                }
+    		},
+    		error: function(jqXHR, textStatus, errorThrown){
+    			alert('Error en la funcion getCliente: ' + textStatus);
+    		}
+    	});
+    }
+}
+
+
 function obtenerDatosCliente() {
 	return JSON.stringify({
             "nombre": $('#nombreCliente').val(),
