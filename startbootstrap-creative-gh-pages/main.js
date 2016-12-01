@@ -68,7 +68,7 @@ function  actualizarCliente(){
 
 function obtenerDatosCliente() {
 	return JSON.stringify({
-            "nombre": $('#nombreCliente').val(),
+            "nombre": $('#nombre').val(),
             "apellidoP": $('#apellidoP').val(),
             "apellidoM": $('#apellidoM').val(),
             "foto": $('#foto').val(),
